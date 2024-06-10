@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionsBitField, ActionRowBuilder, StringSelectMenuBuilder, ChannelType } = require('discord.js')
-const ticket = require('../../Schemas/ticketSchema')
+const ticket = require('../../schemas/ticketSchema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -84,7 +84,7 @@ module.exports = {
                                  Category: category.id
                                 })
 
-                                
+
                                 await interaction.reply({ content: `:upscale_1: I have set the category to **${category}**! use /ticket send to send a ticket create message`, ephemeral: true })
 
                             

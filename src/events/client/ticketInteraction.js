@@ -139,7 +139,7 @@ module.exports = {
     
         var msg = await interaction.channel.send({ content: `:upscale_1: Your transcript cache:`, files: [file] })
         var message = `:scroll: **Here is your [ticket transcript](https://mahto.id/chat-exporter?url=${msg.attachments.first()?.url}) from ${interaction.guild.name}!**`
-        await msg.delet().catch(err => {})
+        await msg.delete().catch(err => {})
         await interaction.reply({ content: message, ephemeral: true })
     }
   },
