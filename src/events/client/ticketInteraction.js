@@ -14,7 +14,7 @@ const { createTranscript } = require("discord-html-transcripts");
 
 module.exports = {
   name: "interactionCreate",
-  async async(interaction, client) {
+  async execute(interaction, client) {
     if (interaction.customId == "ticketCreateSelect") {
       const modal = new ModalBuilder()
         .setTitle("Create your ticket")
@@ -87,17 +87,17 @@ module.exports = {
           .addComponents(
             new ButtonBuilder()
             .setCustomId('closeTicket')
-            .setLabel(`:lock: Close Ticket`)
+            .setLabel(`🔒 Close Ticket`)
             .setStyle(ButtonStyle.Primary),
 
             new ButtonBuilder()
             .setCustomId('ticketTranscript')
-            .setLabel(`:scroll: Transcript`)
+            .setLabel(`📜 Transcript`)
             .setStyle(ButtonStyle.Primary)
           )
 
           await channel.send({ embeds: [embed], components: [button] })
-          await interaction.reply({ content: `:sparkles: Your ticket has been opened in ${channel}`, ephemeral: true})
+          await interaction.reply({ content: `✨ Your ticket has been opened in ${channel}`, ephemeral: true})
 
 
       } 
@@ -124,11 +124,11 @@ module.exports = {
         const member = await interaction.guild.members.cache.get(name)
 
         const reason = interaction.fields.getTextInputValue('closeReasonTicket')
-        await interaction.reply({ content: `:lock: Closing this ticket...`})
+        await interaction.reply({ content: `🔒 Closing this ticket...`})
 
         setTimeout(async () => {
             await channel.delete().catch(err => {})
-            await member.send(`:loudspeaker:  You are receiving this notification because your ticket in ${interaction.guild.name} has been closed for: \`${reason}\``).catch(err => {})
+            await member.send(`📢  You are receiving this notification because your ticket in ${interaction.guild.name} has been closed for: \`${reason}\``).catch(err => {})
         }, 5000)
     } else if (interaction.customId == 'ticketTranscript') {
         const file = await createTranscript(interaction.channel, {
@@ -138,7 +138,7 @@ module.exports = {
         })
     
         var msg = await interaction.channel.send({ content: `:upscale_1: Your transcript cache:`, files: [file] })
-        var message = `:scroll: **Here is your [ticket transcript](https://mahto.id/chat-exporter?url=${msg.attachments.first()?.url}) from ${interaction.guild.name}!**`
+        var message = `📜 **Here is your [ticket transcript](https://mahto.id/chat-exporter?url=${msg.attachments.first()?.url}) from ${interaction.guild.name}!**`
         await msg.delete().catch(err => {})
         await interaction.reply({ content: message, ephemeral: true })
     }
