@@ -84,8 +84,12 @@ module.exports = {
                                  Category: category.id
                                 })
 
+                                
+                                await interaction.reply({ content: `:upscale_1: I have set the category to **${category}**! use /ticket send to send a ticket create message`, ephemeral: true })
+
                             
                         }
+
 
             }
      
